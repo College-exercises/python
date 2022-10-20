@@ -1,4 +1,4 @@
-from typing import TypeVar
+from typing import Any, TypeVar
 import sympy
 
 
@@ -50,31 +50,23 @@ def ex5(matrix: list[list[T]]) -> list[list[T]]:
         out.append([])
         for j in range(len(matrix[0])):
             if i > j:
-                out[i].append(0)
+                out[i].append(0)  # type: ignore
             else:
                 out[i].append(matrix[i][j])
 
     return out
 
 
-def ex6(*lists: list[int], x: int) -> list[int | None]:
-    out: list[int | None] = []
-
+def ex6(*lists: list, x: Any) -> list:
+    current_freq: dict[int, int] = {}
     for lst in lists:
-        current_freq: dict[int, int] = {}
         for item in lst:
             try:
                 current_freq[item] += 1
             except KeyError:
                 current_freq[item] = 1
-        for item in current_freq:
-            if current_freq[item] == x:
-                out.append(item)
-                break
-        else:
-            out.append(None)
 
-    return out
+    return [item for item in current_freq if current_freq[item] == x]
 
 
 def __is_palindrome(num: int) -> bool:
@@ -120,6 +112,7 @@ def ex9(matrix: list[list[int]]) -> list[tuple[int, int]]:
 
 
 def ex10(*lists: list) -> list[tuple]:
+    # return list(zip(*lists))
     max_len = max(len(lst) for lst in lists)
 
     new_lists: list[list] = []
@@ -127,7 +120,6 @@ def ex10(*lists: list) -> list[tuple]:
         new_lists.append(lst)
         for _ in range(max_len - len(new_lists[-1])):
             new_lists[-1].append(None)
-    # return list(zip(*lists))
 
     out: list[tuple] = []
     for lst in new_lists:

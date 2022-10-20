@@ -1,0 +1,14 @@
+{
+	"configurations": [
+		{
+			"name": "Python: Current File",
+			"type": "python",
+			"request": "launch",
+			"program": "${relativeFileDirname}/main.py",
+			"console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+			"justMyCode": true,
+			"env": { "PYTHONPATH": "." }
+		}
+	]
+}
