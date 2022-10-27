@@ -1,4 +1,3 @@
-import difflib
 import json
 from typing import TypeVar
 from lab2 import exercices
@@ -18,10 +17,8 @@ def ex2(string: str) -> dict[str, int]:
     return out
 
 
-def ex3(d1: dict, d2: dict) -> str:
-    return "".join(
-        difflib.context_diff(json.dumps(d1, indent=1), json.dumps(d2, indent=1))
-    )
+def ex3(d1: dict, d2: dict) -> bool:
+    return json.dumps(d1) == json.dumps(d2)
 
 
 def ex4(tag: str, content: str, **key_val: str) -> str:
