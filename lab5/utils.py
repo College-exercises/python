@@ -103,16 +103,49 @@ def ex7(**kwargs) -> list[int]:
     return out
 
 
-def multiply_by_two(x):
+def ex8_wrapper(func: Callable) -> Callable:
+    def print_args(*args, **kwargs):
+        print(f"args:", args, kwargs)
+        return func(*args, **kwargs)
+
+    return print_args
+
+
+@ex8_wrapper
+def multiply_by_two(x: int):
     return x * 2
 
 
+@ex8_wrapper
 def add_numbers(a, b):
     return a + b
 
 
-# def ex8(func:Callable) -> None:
-#     print(f"Arguments are {args} and will return -")
+def multiply_output(func: Callable) -> Callable:
+    def multiply(*args, **kwargs):
+        return func(*args, **kwargs) * 2
+
+    return multiply
+
+
+@multiply_output
+def multiply_by_three(x: int) -> int:
+    return x * 3
+
+
+def augment_function(func: Callable) -> Callable:
+    def augment(decorators: list[Callable[[Callable], Callable]], *args, **kwargs):
+        out = func(*args, **kwargs)
+        for dec in decorators:
+            out = dec(func)(*args, **kwargs)
+        return out
+
+    return augment
+
+
+@augment_function
+def other_add_numbers(a: int, b: int) -> int:
+    return a + b
 
 
 def ex9(pairs: list[tuple[int, int]]) -> list[dict[str, int | float]]:
