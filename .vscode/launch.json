@@ -8,7 +8,8 @@
 			"console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
 			"justMyCode": true,
-			"env": { "PYTHONPATH": "." }
+			"env": { "PYTHONPATH": "." },
+			"args": ["-use_dict", "project/dict.txt"]
 		}
 	]
 }
